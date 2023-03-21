@@ -43,7 +43,7 @@ fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&in
 
 //local storage for a favorite  button for recipe OR click on recipe to go to quickly
 //need to replace "example.com" with correct link
-//need to add <button id="favorite-button">Add to favorites</button> code to css
+//need to add <button id="favorite-button">Add to favorites</button> code to css? html?
 //need to test
 
 
