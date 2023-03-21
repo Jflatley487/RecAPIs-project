@@ -9,13 +9,47 @@ var recipeList = document.getElementById('recipe-list');
 
 
 
+const recipesContainer = document.querySelector('#recipes');
 
+fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${protein}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    data.results.forEach(recipe => {
+      fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
+        .then(response => response.json())
+        .then(recipeData => {
+          const recipeElement = document.createElement('div');
+          recipeElement.classList.add('recipe');
 
-fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        data.forEach(recipe => {
+          const imageElement = document.createElement('img');
+          imageElement.src = recipe.image;
+
+          const titleElement = document.createElement('h2');
+          titleElement.textContent = recipe.title;
+
+          const instructionLinkElement = document.createElement('a');
+          instructionLinkElement.href = recipeData.sourceUrl;
+          instructionLinkElement.textContent = 'View Instructions';
+
+          recipeElement.appendChild(imageElement);
+          recipeElement.appendChild(titleElement);
+          recipeElement.appendChild(instructionLinkElement);
+          recipesContainer.appendChild(recipeElement);
+        })
+        .catch(error => {
+          console.error(`Error fetching recipe with ID ${recipe.id}`, error);
+        });
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching data', error);
+  });
+  
+       
+       
+       
+        /*data.forEach(recipe => {
             const recipeItem = document.createElement('li');
             recipeItem.innerHTML = `
           <div>
@@ -27,11 +61,10 @@ fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&in
           </div>
         `;
             recipeList.appendChild(recipeItem);
-        });
-    })
+        
             .catch((error) => {
                 console.error('Error:', error);
-            });
+            });*/
 
 
 
