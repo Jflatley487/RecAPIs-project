@@ -20,4 +20,12 @@ The user will be able to **search** via a drop down box for:
     -&insert API2 used
 - Client-side storage  
 
+## Usage  
 
+In order for the *application* to be used, the user can go to &insert deployed URL& and begin utilizing the **search** function immediately.  The user does not need any additional extensions, plugins or downloads for this application. 
+
+&&insert screenshot of homepage&&  
+
+&&insert screenshot of dropdown box working&&  
+
+&&insert screenshot of search results&&
