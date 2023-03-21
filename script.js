@@ -1,23 +1,20 @@
-
 var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
-var protein = 'beef';
-var searchButton = document.getElementById('search-btn');
+var protein = "beef";
+var searchButton = document.getElementById("search-btn");
 //let url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${userInp}`;
-let results = document.getElementById('results');
-let userInp = document.getElementById('food').value;
-var recipeList = document.getElementById('recipe-list');
+let results = document.getElementById("results");
+let userInp = document.getElementById("food").value;
+var recipeList = document.getElementById("recipe-list");
 
-
-
-
-
-fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        data.forEach(recipe => {
-            const recipeItem = document.createElement('li');
-            recipeItem.innerHTML = `
+fetch(
+  `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`
+)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    data.forEach((recipe) => {
+      const recipeItem = document.createElement("li");
+      recipeItem.innerHTML = `
           <div>
             <img src="${recipe.image}" alt="${recipe.title}" />
             <h2>${recipe.title}</h2>
@@ -26,17 +23,16 @@ fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&in
             <p><strong>Instructions:</strong> <a href="${recipe.sourceUrl}">Click here</a></p>
           </div>
         `;
-            recipeList.appendChild(recipeItem);
-        });
-    })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+      recipeList.appendChild(recipeItem);
+    });
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+//searchButton.addEventListener('submit', displayRecipe);
 
 
-
-
-    //searchButton.addEventListener('submit', displayRecipe);
 
 
 //local storage vvvv
@@ -46,41 +42,40 @@ fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&in
 //need to add <button id="favorite-button">Add to favorites</button> code to css? html?
 //need to test
 
+const link = "https://www.example.com";
+const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-const link = 'https://www.example.com';
-const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+const favoriteButton = document.getElementById("favorite-button");
 
-const favoriteButton = document.getElementById('favorite-button');
-
-favoriteButton.addEventListener('click', function() {
+favoriteButton.addEventListener("click", function () {
   if (favorites.includes(link)) {
     // Remove the link from the favorites
     const index = favorites.indexOf(link);
     favorites.splice(index, 1);
 
     // Update the text and style of the button
-    favoriteButton.textContent = 'Add to favorites';
-    favoriteButton.classList.remove('active');
+    favoriteButton.textContent = "Add to favorites";
+    favoriteButton.classList.remove("active");
   } else {
     // Add the link to the favorites
     favorites.push(link);
 
     // Update the text and style of the button
-    favoriteButton.textContent = 'Remove from favorites';
-    favoriteButton.classList.add('active');
+    favoriteButton.textContent = "Remove from favorites";
+    favoriteButton.classList.add("active");
   }
 
   // Store the updated favorites in local storage
-  localStorage.setItem('favorites', JSON.stringify(favorites));
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 });
 
 // Update the text and style of the button when the page loads
 if (favorites.includes(link)) {
-  favoriteButton.textContent = 'Remove from favorites';
-  favoriteButton.classList.add('active');
+  favoriteButton.textContent = "Remove from favorites";
+  favoriteButton.classList.add("active");
 } else {
-  favoriteButton.textContent = 'Add to favorites';
-  favoriteButton.classList.remove('active');
+  favoriteButton.textContent = "Add to favorites";
+  favoriteButton.classList.remove("active");
 }
 
 //local storage ^^^^
@@ -90,15 +85,9 @@ if (favorites.includes(link)) {
 
 
 
-
-
-
-
-
 /*searchButton.addEventListener('click', () => {
     let userInp = document.getElementById('user-inp').value;
 });*/
-
 
 /*fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
     .then((response) => response.json())
@@ -111,15 +100,6 @@ if (favorites.includes(link)) {
         
         
     });*/
-
-
-
-
-
-
-
-
-
 
 /*/Fetch request
 fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
@@ -155,4 +135,3 @@ function displayRecipe(data) {
 }
 
 searchButton.addEventListener('submit', displayRecipe);*/
-
