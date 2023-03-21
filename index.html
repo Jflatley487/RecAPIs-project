@@ -18,32 +18,32 @@
     <form action="/action_page.php">
       <label for="Food">Choose Meat from list to see safe cooking temperature:</label>
       <select name="food" id="food">
-        <option value="Rib eye Steak" data-picture= ""></option>Rib eye Steak</option>
-        <option value="Brisket">Brisket</option>
-        <option value="Veal">Veal</option>
-        <option value="Red Snapper">Red Snapper</option>
+        <option value="Beef">Beef</option>
+        <option value="Pork">Pork</option>
         <option value="Chicken">Chicken</option>
-        <option value="Duck">Duck</option>
+        <option value="Fish">Fish</option>
+        <option value="Shellfish">Shellfish</option>
+        
         
       </select>
       <br><br>
-      <input type="submit" value="Submit">
+      <input id="search-btn" type="submit" value="Submit">
     </form>
     
-    <p>Click the "Submit" button to see the safe cooking temperature for each meat :)".</p>
+    <p>Click the "Submit" button to see the top 5 popular meal ideas from Spoonify.com</p>
 
-    <div class="sidenav">
+    <!-- <div class="sidenav">
         <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
-      </div>
+      </div> -->
       
       <!-- Page content -->
-      <div class="main">
+      <div id="recipes">
         ...
       </div>
-    
+    <script src="./script.js"></script>
     </body>
     </html>
     
