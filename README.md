@@ -12,4 +12,12 @@ The user will be able to **search** via a drop down box for:
 - Fish    
 - Shellfish    
 
+## Technologies Used
+
+- Bulma CSS framework
+- 2 APIs  
+    -&insert API1 used  
+    -&insert API2 used
+- Client-side storage  
+
 
