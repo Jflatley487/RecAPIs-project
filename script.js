@@ -1,50 +1,100 @@
-
 var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
-var protein = 'beef';
-var searchButton = document.getElementById('search-btn');
-//let url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${userInp}`;
-let results = document.getElementById('results');
-let userInp = document.getElementById('food').value;
-var recipeList = document.getElementById('recipe-list');
+var form = document.querySelector('form');
+var foodDropdown = document.getElementById('food');
+var recipesContainer = document.getElementById('recipes');
 
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // prevent the default form submission
+  var food = foodDropdown.value;
+  recipesContainer.innerHTML = '';
 
+  fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${food}&number=5`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      data.results.forEach(recipe => {
+        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
+          .then(response => response.json())
+          .then(recipeData => {
+            const recipeElement = document.createElement('div');
+            recipeElement.classList.add('recipe');
 
-const recipesContainer = document.querySelector('#recipes');
+            const imageElement = document.createElement('img');
+            imageElement.src = recipe.image;
 
-fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${protein}`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    data.results.forEach(recipe => {
-      fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
-        .then(response => response.json())
-        .then(recipeData => {
-          const recipeElement = document.createElement('div');
-          recipeElement.classList.add('recipe');
+            const titleElement = document.createElement('h2');
+            titleElement.textContent = recipe.title;
 
-          const imageElement = document.createElement('img');
-          imageElement.src = recipe.image;
+            const instructionLinkElement = document.createElement('a');
+            instructionLinkElement.href = recipeData.sourceUrl;
+            instructionLinkElement.textContent = 'View Instructions';
 
-          const titleElement = document.createElement('h2');
-          titleElement.textContent = recipe.title;
-
-          const instructionLinkElement = document.createElement('a');
-          instructionLinkElement.href = recipeData.sourceUrl;
-          instructionLinkElement.textContent = 'View Instructions';
-
-          recipeElement.appendChild(imageElement);
-          recipeElement.appendChild(titleElement);
-          recipeElement.appendChild(instructionLinkElement);
-          recipesContainer.appendChild(recipeElement);
-        })
-        .catch(error => {
-          console.error(`Error fetching recipe with ID ${recipe.id}`, error);
-        });
+            recipeElement.appendChild(imageElement);
+            recipeElement.appendChild(titleElement);
+            recipeElement.appendChild(instructionLinkElement);
+            recipesContainer.appendChild(recipeElement);
+          })
+          .catch(error => {
+            console.error(`Error fetching recipe with ID ${recipe.id}`, error);
+          });
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data', error);
     });
-  })
-  .catch(error => {
-    console.error('Error fetching data', error);
-  });
+});
+
+
+
+
+
+
+// var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
+// var protein = 'beef';
+// var searchButton = document.getElementById('search-btn');
+// //let url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${userInp}`;
+// let results = document.getElementById('results');
+// let userInp = document.getElementById('food').value;
+// var recipeList = document.getElementById('recipe-list');
+
+
+
+// const recipesContainer = document.querySelector('#recipes');
+
+// fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${protein}`)
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log(data);
+//     data.results.forEach(recipe => {
+//       fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
+//         .then(response => response.json())
+//         .then(recipeData => {
+//           const recipeElement = document.createElement('div');
+//           recipeElement.classList.add('recipe');
+
+//           const imageElement = document.createElement('img');
+//           imageElement.src = recipe.image;
+
+//           const titleElement = document.createElement('h2');
+//           titleElement.textContent = recipe.title;
+
+//           const instructionLinkElement = document.createElement('a');
+//           instructionLinkElement.href = recipeData.sourceUrl;
+//           instructionLinkElement.textContent = 'View Instructions';
+
+//           recipeElement.appendChild(imageElement);
+//           recipeElement.appendChild(titleElement);
+//           recipeElement.appendChild(instructionLinkElement);
+//           recipesContainer.appendChild(recipeElement);
+//         })
+//         .catch(error => {
+//           console.error(`Error fetching recipe with ID ${recipe.id}`, error);
+//         });
+//     });
+//   })
+//   .catch(error => {
+//     console.error('Error fetching data', error);
+//   });
   
        
        
