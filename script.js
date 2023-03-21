@@ -39,9 +39,13 @@ fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&in
     //searchButton.addEventListener('submit', displayRecipe);
 
 
-
+//local storage vvvv
 
 //local storage for a favorite  button for recipe OR click on recipe to go to quickly
+//need to replace "example.com" with correct link
+//need to add <button id="favorite-button">Add to favorites</button> code to css
+//need to test
+
 
 const link = 'https://www.example.com';
 const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -79,7 +83,7 @@ if (favorites.includes(link)) {
   favoriteButton.classList.remove('active');
 }
 
-
+//local storage ^^^^
 
 
 
