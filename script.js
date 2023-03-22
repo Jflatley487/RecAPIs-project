@@ -8,7 +8,7 @@ var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById("get-joke");
 var jokeContainer = document.getElementById("joke-container");
-const recentLinks = [];
+const recentLinks = JSON.parse(localStorage.getItem('recentLinks')) || [];
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // prevent the default form submission
@@ -44,14 +44,16 @@ form.addEventListener("submit", function (event) {
             instructionLinkElement.addEventListener('click', function(event) {
               event.preventDefault(); // prevent the default link navigation
               const link = this.href;
-              localStorage.setItem('favLink', link);
-              console.log('Link saved:', link);
+              if (link) {
+                recentLinks.push(link);
+                console.log('Link saved:', link);
+                // limit recentLinks to 5 items
+                recentLinks.splice(0, Math.max(0, recentLinks.length - 5));
+                // save recentLinks to local storage
+                localStorage.setItem('recentLinks', JSON.stringify(recentLinks));
+              }
             });
-            const link = this.href;
-            recentLinks.unshift(link);
-            recentLinks.splice(5); // limit to 5 links
-            localStorage.setItem("recentLinks", JSON.stringify(recentLinks));
-            console.log("Link saved:", link);
+            
             // ^^^
 
             recipeElement.appendChild(imageElement);
