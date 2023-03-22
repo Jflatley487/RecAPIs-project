@@ -74,8 +74,20 @@ function renderLastProtein () {
     }
   }
 
-  
-}
+  searchButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    saveLastProtein();
+    renderLastProtein();
+    });
+    
+    // The init() function fires when the page is loaded 
+    function init() {
+      // When the init function is executed, the code inside renderLastGrade function will also execute
+      renderLastProtein();
+    }
+    init();
+    
+
 
 fetch("https://icanhazdadjoke.com/", {
   headers: {
