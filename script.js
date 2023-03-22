@@ -87,7 +87,23 @@ fetch("https://icanhazdadjoke.com/", {
     }
   }
  
+  function init() {
+    // Get stored todos from localStorage
+    var storedRecipes = JSON.parse(localStorage.getItem("recipes"));
   
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedRecipes !== null) {
+      recentRecipes = storedRecipes;
+    }
+  
+    // This is a helper function that will render todos to the DOM
+    renderRecentRecipes();
+  }
+  
+  function storeRecipes() {
+    // Stringify and set key in localStorage to todos array
+    localStorage.setItem("recipes", JSON.stringify(recipes));
+  }
 
 /*getJokeButton.addEventListener('click', () => {
   fetch('https://icanhazdadjoke.com/', {
