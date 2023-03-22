@@ -43,41 +43,41 @@ fetch(
 //need to test
 //need to move entire code into proper place in js 
 
-// const link = "https://www.example.com";
-// const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+const link = "https://www.example.com";
+const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-// const favoriteButton = document.getElementById("favorite-button");
+const favoriteButton = document.getElementById("favorite-button");
 
-// favoriteButton.addEventListener("click", function () {
-//   if (favorites.includes(link)) {
-//     // Remove the link from the favorites
-//     const index = favorites.indexOf(link);
-//     favorites.splice(index, 1);
+favoriteButton.addEventListener("click", function () {
+  if (favorites.includes(link)) {
+    // Remove the link from the favorites
+    const index = favorites.indexOf(link);
+    favorites.splice(index, 1);
 
-//     // Update the text and style of the button
-//     favoriteButton.textContent = "Add to favorites";
-//     favoriteButton.classList.remove("active");
-//   } else {
-//     // Add the link to the favorites
-//     favorites.push(link);
+    // Update the text and style of the button
+    favoriteButton.textContent = "Add to favorites";
+    favoriteButton.classList.remove("active");
+  } else {
+    // Add the link to the favorites
+    favorites.push(link);
 
-//     // Update the text and style of the button
-//     favoriteButton.textContent = "Remove from favorites";
-//     favoriteButton.classList.add("active");
-//   }
+    // Update the text and style of the button
+    favoriteButton.textContent = "Remove from favorites";
+    favoriteButton.classList.add("active");
+  }
 
-//   // Store the updated favorites in local storage
-//   localStorage.setItem("favorites", JSON.stringify(favorites));
-// });
+  // Store the updated favorites in local storage
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+});
 
-// // Update the text and style of the button when the page loads
-// if (favorites.includes(link)) {
-//   favoriteButton.textContent = "Remove from favorites";
-//   favoriteButton.classList.add("active");
-// } else {
-//   favoriteButton.textContent = "Add to favorites";
-//   favoriteButton.classList.remove("active");
-// }
+// Update the text and style of the button when the page loads
+if (favorites.includes(link)) {
+  favoriteButton.textContent = "Remove from favorites";
+  favoriteButton.classList.add("active");
+} else {
+  favoriteButton.textContent = "Add to favorites";
+  favoriteButton.classList.remove("active");
+}
 
 //local storage ^^^^
 
