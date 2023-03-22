@@ -8,10 +8,9 @@ var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById("get-joke");
 var jokeContainer = document.getElementById("joke-container");
-//
-var recipeName = document.querySelector("#recipe");
-var recentRecipes = [];
-//
+
+var protein = document.getElementById("protein")
+
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // prevent the default form submission
@@ -58,7 +57,25 @@ form.addEventListener("submit", function (event) {
     });
 });
 
+function saveProtein () {
+  var lastSearchedProtein = {
+    protein: protein.value,
+  }
+  localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
+}
 
+function renderLastProtein () {
+  var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
+  if (lastProtein !== null) {
+    document.getElementById("protein").innerHTML = lastProtein.protein;
+    
+    } else {
+      return;
+    }
+  }
+
+  
+}
 
 fetch("https://icanhazdadjoke.com/", {
   headers: {
@@ -73,37 +90,9 @@ fetch("https://icanhazdadjoke.com/", {
   });
 
 
-  //local storage vvv
+  
 
-  function renderRecentRecipes() {
-   
-    // Render a new li for each todo
-    for (var i = 0; i < recentRecipes.length; i++) {
-      var recentRecipe = recentRecipes[i];
   
-      var li = document.createElement("li");
-      li.textContent = recentRecipe;
-      li.setAttribute("data-index", i);
-    }
-  }
- 
-  function init() {
-    // Get stored todos from localStorage
-    var storedRecipes = JSON.parse(localStorage.getItem("recipes"));
-  
-    // If todos were retrieved from localStorage, update the todos array to it
-    if (storedRecipes !== null) {
-      recentRecipes = storedRecipes;
-    }
-  
-    // This is a helper function that will render todos to the DOM
-    renderRecentRecipes();
-  }
-  
-  function storeRecipes() {
-    // Stringify and set key in localStorage to todos array
-    localStorage.setItem("recipes", JSON.stringify(recipes));
-  }
 
 /*getJokeButton.addEventListener('click', () => {
   fetch('https://icanhazdadjoke.com/', {
