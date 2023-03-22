@@ -8,6 +8,7 @@ var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById("get-joke");
 var jokeContainer = document.getElementById("joke-container");
+
 const recentLinks = JSON.parse(localStorage.getItem('recentLinks')) || [];
 
 form.addEventListener("submit", function (event) {
@@ -86,19 +87,11 @@ function renderRecentLinks() {
   });
 }
 
-function renderFavRecipe() {
-  var recipe = localStorage.getItem('recipe');
-  var link = localStorage.getItem('favLink');
-
-  if (!recipe || !link) {
-    return;
-  }
-
   recipeSpan.textContent = recipe;
   linkSpan.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
   renderRecentLinks();
-}
+
 
 
 fetch("https://icanhazdadjoke.com/", {
