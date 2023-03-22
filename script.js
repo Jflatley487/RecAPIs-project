@@ -51,6 +51,8 @@ form.addEventListener('submit', function(event) {
 });
 
 
+//local storage, save fav recipe link to page
+
 renderFavRecipe();
 
 function displayMessage(type, message) {
@@ -58,7 +60,20 @@ function displayMessage(type, message) {
   msgDiv.setAttribute("class", type);
 }
 
+function renderFavRecipe() {
+  var recipe = localStorage.getItem("recipe");
+  var link = localStorage.getItem("link");
 
+  if (!recipe || !link) {
+    return;
+  }
+
+  userRecipeSpan.textContent = recipe;
+  userLinkSpan.textContent = link;
+}
+
+
+//local storage ^^^^
 
 fetch('https://icanhazdadjoke.com/', {
   headers: {
