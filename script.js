@@ -8,7 +8,7 @@ var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById("get-joke");
 var jokeContainer = document.getElementById("joke-container");
-
+var submitButton = document.getElementById("search-btn");
 var protein = document.getElementById("protein")
 
 
@@ -57,36 +57,37 @@ form.addEventListener("submit", function (event) {
     });
 });
 
-function saveProtein () {
-  var lastSearchedProtein = {
-    protein: protein.value,
-  }
-  localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
-}
+// function saveLastProtein () {
+//   var lastSearchedProtein = {
+//     protein: foodDropdown.value,
+//   }
+//   localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
+// }
 
-function renderLastProtein () {
-  var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
-  if (lastProtein !== null) {
-    document.getElementById("protein").innerHTML = lastProtein.protein;
+// function renderLastProtein () {
+//   var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
+//   if (lastProtein !== null) {
+//     document.getElementById("protein").innerHTML = lastProtein.protein;
     
-    } else {
-      return;
-    }
-  }
+//     } else {
+//       return;
+//     }
+//   }
 
-  searchButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    saveLastProtein();
-    renderLastProtein();
-    });
+//   submitButton.addEventListener("click", function(event) {
+//     event.preventDefault();
+//     saveLastProtein();
+//     renderLastProtein();
+//     });
     
-    // The init() function fires when the page is loaded 
-    function init() {
-      // When the init function is executed, the code inside renderLastGrade function will also execute
-      renderLastProtein();
-    }
-    init();
+//     // The init() function fires when the page is loaded 
+//     function init() {
+//       // When the init function is executed, the code inside renderLastGrade function will also execute
+//       renderLastProtein();
+//     }
+//     init();
     
+//     console.log(renderLastProtein)
 
 
 fetch("https://icanhazdadjoke.com/", {
