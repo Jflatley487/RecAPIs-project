@@ -55,39 +55,38 @@ form.addEventListener("submit", function (event) {
     .catch((error) => {
       console.error("Error fetching data", error);
     });
+
+    function saveLastProtein () {
+      var lastSearchedProtein = {
+        protein: foodDropdown.value,
+      }
+      localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
+    }
+    
+    function renderLastProtein () {
+      var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
+      if (lastProtein !== null) {
+        document.getElementById("protein").innerHTML = lastProtein.protein;
+        
+        } else {
+          return;
+        }
+      }
+    
+      submitButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        saveLastProtein();
+        renderLastProtein();
+        });
+        
+         
+        function init() {
+          renderLastProtein();
+        }
+        init();
+        
+        console.log(renderLastProtein)
 });
-
-// function saveLastProtein () {
-//   var lastSearchedProtein = {
-//     protein: foodDropdown.value,
-//   }
-//   localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
-// }
-
-// function renderLastProtein () {
-//   var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
-//   if (lastProtein !== null) {
-//     document.getElementById("protein").innerHTML = lastProtein.protein;
-    
-//     } else {
-//       return;
-//     }
-//   }
-
-//   submitButton.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     saveLastProtein();
-//     renderLastProtein();
-//     });
-    
-//     // The init() function fires when the page is loaded 
-//     function init() {
-//       // When the init function is executed, the code inside renderLastGrade function will also execute
-//       renderLastProtein();
-//     }
-//     init();
-    
-//     console.log(renderLastProtein)
 
 
 fetch("https://icanhazdadjoke.com/", {
@@ -102,7 +101,7 @@ fetch("https://icanhazdadjoke.com/", {
     jokeContainer.innerHTML = joke;
   });
 
-
+  
   
 
   
