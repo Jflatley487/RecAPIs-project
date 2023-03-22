@@ -8,6 +8,8 @@ var recipesContainer = document.getElementById('recipes');
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById('get-joke');
 var jokeContainer = document.getElementById('joke-container');
+var recipeSpan = document.getElementById('recipe');
+var linkSpan = document.getElementById('link');
 
 form.addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the default form submission
@@ -68,8 +70,8 @@ function renderFavRecipe() {
     return;
   }
 
-  userRecipeSpan.textContent = recipe;
-  userLinkSpan.textContent = link;
+  recipeSpan.textContent = recipe;
+  linkSpan.textContent = link;
 }
 
 
