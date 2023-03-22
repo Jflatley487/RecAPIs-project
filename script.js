@@ -8,8 +8,6 @@ var recipesContainer = document.getElementById('recipes');
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById('get-joke');
 var jokeContainer = document.getElementById('joke-container');
-var recipeSpan = document.getElementById('recipe');
-var linkSpan = document.getElementById('link');
 
 form.addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the default form submission
@@ -55,31 +53,37 @@ form.addEventListener('submit', function(event) {
 
 //local storage, save fav recipe link to page
 
-renderFavRecipe();
+// renderFavRecipe();
 
-function displayMessage(type, message) {
-  msgDiv.textContent = message;
-  msgDiv.setAttribute("class", type);
-}
+// function displayMessage(type, message) {
+//   msgDiv.textContent = message;
+//   msgDiv.setAttribute("class", type);
+// }
 
-function renderFavRecipe() {
-  var recipe = localStorage.getItem("recipe");
-  var link = localStorage.getItem("link");
+// function renderFavRecipe() {
+//   var recipe = localStorage.getItem("recipe");
+//   var link = localStorage.getItem("link");
 
-  if (!recipe || !link) {
-    return;
-  }
+//   if (!recipe || !link) {
+//     return;
+//   }
 
-  recipeSpan.textContent = recipe;
-  linkSpan.textContent = link;
-}
+//   recipeSpan.textContent = recipe;
+//   linkSpan.textContent = link;
+// }
 
-//need to add fav button in html
-favoriteButton.addEventListener("click", function(event) {
-  event.preventDefault();
+// //need to add fav button in html
+// favoriteButton.addEventListener("click", function(event) {
+//   event.preventDefault();
 
-  var recipe = document.querySelector("#recipe").value;
-  var link = document.querySelector("#link").value;
+//   var recipe = document.querySelector("#recipe").value;
+//   var link = document.querySelector("#link").value;
+
+//     localStorage.setItem("recipe", recipe);
+//     localStorage.setItem("link", link);
+//     renderFavRecipe();
+//   }
+// );
 
 //local storage ^^^^
 
