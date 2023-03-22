@@ -78,6 +78,19 @@ function renderRecentLinks() {
   });
 }
 
+function renderFavRecipe() {
+  var recipe = localStorage.getItem('recipe');
+  var link = localStorage.getItem('favLink');
+
+  if (!recipe || !link) {
+    return;
+  }
+
+  recipeSpan.textContent = recipe;
+  linkSpan.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+
+  renderRecentLinks();
+}
 
 
 fetch("https://icanhazdadjoke.com/", {
