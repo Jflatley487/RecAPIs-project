@@ -41,6 +41,12 @@ form.addEventListener("submit", function (event) {
             instructionLinkElement.textContent = "View Instructions";
 
             //local storage
+            instructionLinkElement.addEventListener('click', function(event) {
+              event.preventDefault(); // prevent the default link navigation
+              const link = this.href;
+              localStorage.setItem('favLink', link);
+              console.log('Link saved:', link);
+            });
             const link = this.href;
             recentLinks.unshift(link);
             recentLinks.splice(5); // limit to 5 links
