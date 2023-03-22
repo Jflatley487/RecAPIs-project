@@ -1,4 +1,7 @@
 var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
+// var APIkeyt = `04061e24c1ff4f54b3143f477378f3ee`;
+// var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
+// var APIkeyl = `c5e235f24ba7435fb0d3fac538602e34 `;
 var form = document.querySelector('form');
 var foodDropdown = document.getElementById('food');
 var recipesContainer = document.getElementById('recipes');
