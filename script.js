@@ -1,6 +1,6 @@
-var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
+//var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
 // var APIkeyt = `04061e24c1ff4f54b3143f477378f3ee`;
-// var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
+var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
 // var APIkeyl = `c5e235f24ba7435fb0d3fac538602e34 `;
 var form = document.querySelector('form');
 var foodDropdown = document.getElementById('food');
@@ -14,12 +14,12 @@ form.addEventListener('submit', function(event) {
   var food = foodDropdown.value;
   recipesContainer.innerHTML = '';
 
-  fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${food}&number=5`)
+  fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkeys}&includeIngredients=${food}&number=2`)
     .then(response => response.json())
     .then(data => {
       console.log(data);
       data.results.forEach(recipe => {
-        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
+        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkeys}`)
           .then(response => response.json())
           .then(recipeData => {
             const recipeElement = document.createElement('div');
@@ -49,6 +49,16 @@ form.addEventListener('submit', function(event) {
       console.error('Error fetching data', error);
     });
 });
+
+
+renderFavRecipe();
+
+function displayMessage(type, message) {
+  msgDiv.textContent = message;
+  msgDiv.setAttribute("class", type);
+}
+
+
 
 fetch('https://icanhazdadjoke.com/', {
   headers: {
