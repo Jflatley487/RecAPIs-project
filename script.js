@@ -8,8 +8,10 @@ var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
 var getJokeButton = document.getElementById("get-joke");
 var jokeContainer = document.getElementById("joke-container");
-
-const recentLinks = JSON.parse(localStorage.getItem('recentLinks')) || [];
+//
+var recipeName = document.querySelector("#recipe");
+var recentRecipes = [];
+//
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // prevent the default form submission
@@ -41,22 +43,6 @@ form.addEventListener("submit", function (event) {
             instructionLinkElement.href = recipeData.sourceUrl;
             instructionLinkElement.textContent = "View Instructions";
 
-            //local storage
-            instructionLinkElement.addEventListener('click', function(event) {
-              event.preventDefault(); // prevent the default link navigation
-              const link = this.href;
-              if (link) {
-                recentLinks.push(link);
-                console.log('Link saved:', link);
-                // limit recentLinks to 5 items
-                recentLinks.splice(0, Math.max(0, recentLinks.length - 5));
-                // save recentLinks to local storage
-                localStorage.setItem('recentLinks', JSON.stringify(recentLinks));
-              }
-            });
-            
-            // ^^^
-
             recipeElement.appendChild(imageElement);
             recipeElement.appendChild(titleElement);
             recipeElement.appendChild(instructionLinkElement);
@@ -72,26 +58,6 @@ form.addEventListener("submit", function (event) {
     });
 });
 
-function renderRecentLinks() {
-  var links = JSON.parse(localStorage.getItem('recentLinks'));
-  if (!links) {
-    return;
-  }
-  const linksContainer = document.getElementById('recent-links-container');
-  linksContainer.innerHTML = '';
-  links.forEach(link => {
-    const linkElement = document.createElement('a');
-    linkElement.href = link;
-    linkElement.textContent = link;
-    linksContainer.appendChild(linkElement);
-  });
-}
-
-  recipeSpan.textContent = recipe;
-  linkSpan.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
-
-  renderRecentLinks();
-
 
 
 fetch("https://icanhazdadjoke.com/", {
@@ -105,6 +71,23 @@ fetch("https://icanhazdadjoke.com/", {
     const jokeContainer = document.getElementById("joke-container");
     jokeContainer.innerHTML = joke;
   });
+
+
+  //local storage vvv
+
+  function renderRecentRecipes() {
+   
+    // Render a new li for each todo
+    for (var i = 0; i < recentRecipes.length; i++) {
+      var recentRecipe = recentRecipes[i];
+  
+      var li = document.createElement("li");
+      li.textContent = recentRecipe;
+      li.setAttribute("data-index", i);
+    }
+  }
+ 
+  
 
 /*getJokeButton.addEventListener('click', () => {
   fetch('https://icanhazdadjoke.com/', {
