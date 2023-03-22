@@ -35,13 +35,6 @@ form.addEventListener('submit', function(event) {
             instructionLinkElement.href = recipeData.sourceUrl;
             instructionLinkElement.textContent = 'View Instructions';
 
-            instructionLinkElement.addEventListener('click', function(event) {
-              event.preventDefault(); // prevent the default link navigation
-              const link = this.href;
-              localStorage.setItem('favLink', link);
-              console.log('Link saved:', link);
-            });
-
             recipeElement.appendChild(imageElement);
             recipeElement.appendChild(titleElement);
             recipeElement.appendChild(instructionLinkElement);
@@ -60,37 +53,30 @@ form.addEventListener('submit', function(event) {
 
 //local storage, save fav recipe link to page
 
-// renderFavRecipe();
+function renderFavRecipe() {
+  var recipe = localStorage.getItem('recipe');
+  var link = localStorage.getItem('favLink');
 
-// function displayMessage(type, message) {
-//   msgDiv.textContent = message;
-//   msgDiv.setAttribute("class", type);
-// }
+  if (!recipe || !link) {
+    return;
+  }
 
-// function renderFavRecipe() {
-//   var recipe = localStorage.getItem("recipe");
-//   var link = localStorage.getItem("link");
+  recipeSpan.textContent = recipe;
+  linkSpan.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+}
 
-//   if (!recipe || !link) {
-//     return;
-//   }
+//need to add fav button in html
+favoriteButton.addEventListener("click", function(event) {
+  event.preventDefault();
 
-//   recipeSpan.textContent = recipe;
-//   linkSpan.textContent = link;
-// }
+  var recipe = document.querySelector("#recipe").value;
+  var link = document.querySelector("#link").value;
 
-// //need to add fav button in html
-// favoriteButton.addEventListener("click", function(event) {
-//   event.preventDefault();
-
-//   var recipe = document.querySelector("#recipe").value;
-//   var link = document.querySelector("#link").value;
-
-//     localStorage.setItem("recipe", recipe);
-//     localStorage.setItem("link", link);
-//     renderFavRecipe();
-//   }
-// );
+    localStorage.setItem("recipe", recipe);
+    localStorage.setItem("link", link);
+    renderFavRecipe();
+  }
+);
 
 //local storage ^^^^
 
@@ -105,6 +91,9 @@ fetch('https://icanhazdadjoke.com/', {
   const jokeContainer = document.getElementById('joke-container');
   jokeContainer.innerHTML = joke;
 });
+
+
+
 
 
 /*getJokeButton.addEventListener('click', () => {
