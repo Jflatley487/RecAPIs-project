@@ -35,6 +35,13 @@ form.addEventListener('submit', function(event) {
             instructionLinkElement.href = recipeData.sourceUrl;
             instructionLinkElement.textContent = 'View Instructions';
 
+            instructionLinkElement.addEventListener('click', function(event) {
+              event.preventDefault(); // prevent the default link navigation
+              const link = this.href;
+              localStorage.setItem('favLink', link);
+              console.log('Link saved:', link);
+            });
+
             recipeElement.appendChild(imageElement);
             recipeElement.appendChild(titleElement);
             recipeElement.appendChild(instructionLinkElement);
