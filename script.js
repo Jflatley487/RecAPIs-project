@@ -2,6 +2,9 @@ var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
 var form = document.querySelector('form');
 var foodDropdown = document.getElementById('food');
 var recipesContainer = document.getElementById('recipes');
+var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
+var getJokeButton = document.getElementById('get-joke');
+var jokeContainer = document.getElementById('joke-container');
 
 form.addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the default form submission
@@ -43,6 +46,44 @@ form.addEventListener('submit', function(event) {
       console.error('Error fetching data', error);
     });
 });
+
+fetch('https://icanhazdadjoke.com/', {
+  headers: {
+    'Accept': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => {
+  const joke = data.joke;
+  const jokeContainer = document.getElementById('joke-container');
+  jokeContainer.innerHTML = joke;
+});
+
+
+/*getJokeButton.addEventListener('click', () => {
+  fetch('https://icanhazdadjoke.com/', {
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    const joke = data.joke;
+    jokeContainer.innerText = joke;
+  });
+});*/
+
+/*fetch(`https://api.fsis.usda.gov/restaurants/v1/foodsafety/temperature?type=${food}&api_key=${APIkeyTemp}`)
+    .then(response => response.json())
+    .then(data => {
+        const safeTemp = data.safe_temp;
+        console.log('Safe cooking temperature for ' + foodDropdown + ' is ' + ${safeTemp} + 'F');
+    })
+    .catch(error => console.error(error));*/
+
+
+ 
+
 
 
 
