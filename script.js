@@ -74,6 +74,12 @@ function renderFavRecipe() {
   linkSpan.textContent = link;
 }
 
+//need to add fav button in html
+favoriteButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  var recipe = document.querySelector("#recipe").value;
+  var link = document.querySelector("#link").value;
 
 //local storage ^^^^
 
