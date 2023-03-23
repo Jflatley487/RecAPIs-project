@@ -1,67 +1,110 @@
-var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
+//var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
 // var APIkeyt = `04061e24c1ff4f54b3143f477378f3ee`;
-// var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
+var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
 // var APIkeyl = `c5e235f24ba7435fb0d3fac538602e34 `;
-var form = document.querySelector('form');
-var foodDropdown = document.getElementById('food');
-var recipesContainer = document.getElementById('recipes');
+var form = document.querySelector("form");
+var foodDropdown = document.getElementById("food");
+var recipesContainer = document.getElementById("recipes");
 var APIkeyTemp = `1iuNqGlUBl4cLgMqkZa1Y5py2Bhk7ZacWfAwx0fm`;
-var getJokeButton = document.getElementById('get-joke');
-var jokeContainer = document.getElementById('joke-container');
+var getJokeButton = document.getElementById("get-joke");
+var jokeContainer = document.getElementById("joke-container");
+var submitButton = document.getElementById("search-btn");
+var protein = document.getElementById("protein")
 
-form.addEventListener('submit', function(event) {
+
+form.addEventListener("submit", function (event) {
   event.preventDefault(); // prevent the default form submission
   var food = foodDropdown.value;
-  recipesContainer.innerHTML = '';
+  recipesContainer.innerHTML = "";
 
-  fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${food}&number=5`)
-    .then(response => response.json())
-    .then(data => {
+  fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkeys}&includeIngredients=${food}&number=2`
+  )
+    .then((response) => response.json())
+    .then((data) => {
       console.log(data);
-      data.results.forEach(recipe => {
-        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`)
-          .then(response => response.json())
-          .then(recipeData => {
-            const recipeElement = document.createElement('div');
-            recipeElement.classList.add('recipe');
+      data.results.forEach((recipe) => {
+        fetch(
+          `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkeys}`
+        )
+          .then((response) => response.json())
+          .then((recipeData) => {
+            const recipeElement = document.createElement("div");
+            recipeElement.classList.add("recipe");
 
-            const imageElement = document.createElement('img');
+            const imageElement = document.createElement("img");
             imageElement.src = recipe.image;
 
-            const titleElement = document.createElement('h2');
+            const titleElement = document.createElement("h2");
             titleElement.textContent = recipe.title;
 
-            const instructionLinkElement = document.createElement('a');
+            const instructionLinkElement = document.createElement("a");
             instructionLinkElement.href = recipeData.sourceUrl;
-            instructionLinkElement.textContent = 'View Instructions';
+            instructionLinkElement.textContent = "View Instructions";
 
             recipeElement.appendChild(imageElement);
             recipeElement.appendChild(titleElement);
             recipeElement.appendChild(instructionLinkElement);
             recipesContainer.appendChild(recipeElement);
           })
-          .catch(error => {
+          .catch((error) => {
             console.error(`Error fetching recipe with ID ${recipe.id}`, error);
           });
       });
     })
-    .catch(error => {
-      console.error('Error fetching data', error);
+    .catch((error) => {
+      console.error("Error fetching data", error);
     });
+
+    function saveLastProtein () {
+      var lastSearchedProtein = {
+        protein: foodDropdown.value,
+      }
+      localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
+    }
+    
+    function renderLastProtein () {
+      var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
+      if (lastProtein !== null) {
+        document.getElementById("protein").innerHTML = lastProtein.protein;
+        
+        } else {
+          return;
+        }
+      }
+    
+      submitButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        saveLastProtein();
+        renderLastProtein();
+        });
+        
+         
+        function init() {
+          renderLastProtein();
+        }
+        init();
+        
+        console.log(renderLastProtein)
 });
 
-fetch('https://icanhazdadjoke.com/', {
+
+fetch("https://icanhazdadjoke.com/", {
   headers: {
-    'Accept': 'application/json'
-  }
+    Accept: "application/json",
+  },
 })
-.then(response => response.json())
-.then(data => {
-  const joke = data.joke;
-  const jokeContainer = document.getElementById('joke-container');
-  jokeContainer.innerHTML = joke;
-});
+  .then((response) => response.json())
+  .then((data) => {
+    const joke = data.joke;
+    const jokeContainer = document.getElementById("joke-container");
+    jokeContainer.innerHTML = joke;
+  });
 
+  
+  
+
+  
 
 /*getJokeButton.addEventListener('click', () => {
   fetch('https://icanhazdadjoke.com/', {
@@ -84,15 +127,6 @@ fetch('https://icanhazdadjoke.com/', {
     })
     .catch(error => console.error(error));*/
 
-
- 
-
-
-
-
-
-
-
 // var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
 // var protein = 'beef';
 // var searchButton = document.getElementById('search-btn');
@@ -100,8 +134,6 @@ fetch('https://icanhazdadjoke.com/', {
 // let results = document.getElementById('results');
 // let userInp = document.getElementById('food').value;
 // var recipeList = document.getElementById('recipe-list');
-
-
 
 // const recipesContainer = document.querySelector('#recipes');
 
@@ -139,11 +171,8 @@ fetch('https://icanhazdadjoke.com/', {
 //   .catch(error => {
 //     console.error('Error fetching data', error);
 //   });
-  
-       
-       
-       
-        /*data.forEach(recipe => {
+
+/*data.forEach(recipe => {
             const recipeItem = document.createElement('li');
             recipeItem.innerHTML = `
           <div>
@@ -160,29 +189,11 @@ fetch('https://icanhazdadjoke.com/', {
                 console.error('Error:', error);
             });*/
 
-
-
-
-    //searchButton.addEventListener('submit', displayRecipe);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//searchButton.addEventListener('submit', displayRecipe);
 
 /*searchButton.addEventListener('click', () => {
     let userInp = document.getElementById('user-inp').value;
 });*/
-
 
 /*fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
     .then((response) => response.json())
@@ -195,15 +206,6 @@ fetch('https://icanhazdadjoke.com/', {
         
         
     });*/
-
-
-
-
-
-
-
-
-
 
 /*/Fetch request
 fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${APIkey}&ingredients=${protein}`)
@@ -239,4 +241,3 @@ function displayRecipe(data) {
 }
 
 searchButton.addEventListener('submit', displayRecipe);*/
-
