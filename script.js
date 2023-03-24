@@ -1,5 +1,5 @@
 // Declare API keys and elements from the HTML page
-var APIkeys = `04061e24c1ff4f54b3143f477378f3ee`;
+var APIkeys = `c5e235f24ba7435fb0d3fac538602e34`;
 var form = document.querySelector("form");
 var foodDropdown = document.getElementById("food");
 var recipesContainer = document.getElementById("recipes");
