@@ -1,5 +1,5 @@
 // Declare API keys and elements from the HTML page
-var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
+var APIkeys = `04061e24c1ff4f54b3143f477378f3ee`;
 var form = document.querySelector("form");
 var foodDropdown = document.getElementById("food");
 var recipesContainer = document.getElementById("recipes");
@@ -130,14 +130,6 @@ form.addEventListener("submit", function (event) {
       historyContainer.appendChild(historyElement);
     });
   }
-
-  // // Render the last searched protein on page load
-  // function init() {
-  //   renderLastProtein();
-  //   renderRecipeHistory();
-  // }
-  // init();
-  // console.log(renderLastProtein);
 });
 
 
