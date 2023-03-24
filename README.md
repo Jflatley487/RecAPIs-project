@@ -2,9 +2,14 @@
 
 ## Overview
 
-A web *application* that allows a user to **search** for the **safe internal cooking temperatures** of certain proteins.  The user will select a protein from a drop down box.  Upon clicking the ***submit*** button, the user will be presented with the FDA approved **safe internal cooking temperature** for the selected protein.  On the same click, the user will be presented with a number of **recipes** that focus on or include the protein that was initially searched for.  
+A web *application* https://jflatley487.github.io/group1-project  that allows a user to **search** for **recipes** that include certain proteins.  The user will select a protein from a drop-down box.  Upon clicking the ***submit*** button, the user will be presented with the top 5 **recipes ** from Spoonacular for the selected protein.  
 
-The user will be able to **search** via a drop down box for:  
+When the user clicks on a **recipe** link, the **recipe** link will appear as a clickable link on the homepage.  The last 5 **recipes** visited
+
+Additionally, on page load, the user will be presented with a new **joke**. 
+
+
+The user will be able to **search** via a drop-down box for:  
 
 - Beef  
 - Pork  
@@ -15,17 +20,28 @@ The user will be able to **search** via a drop down box for:
 ## Technologies Used
 
 - Bulma CSS framework
-- 2 APIs  
-    -&insert API1 used  
-    -&insert API2 used
-- Client-side storage  
+- APIs  
+    -https://api.spoonacular.com/recipes
+
+    -https://icanhazdadjoke.com
+
 
 ## Usage  
 
-In order for the *application* to be used, the user can go to &insert deployed URL& and begin utilizing the **search** function immediately.  The user does not need any additional extensions, plugins or downloads for this application. 
+In order for the *application* to be used, the user can go to https://jflatley487.github.io/group1-project and begin utilizing the **search** function immediately.  The user will be presented with a **joke** immediately on page load and for a new **joke**, the user simply needs to refresh the page.  The user does not need any additional extensions, plugins or downloads for this *application*. 
 
-&&insert screenshot of homepage&&  
+![Home Page](assets/img/project1homepage.png)   
 
-&&insert screenshot of dropdown box working&&  
+![Search Complete](assets/img/project1search.png)    
 
-&&insert screenshot of search results&&
+![Recipe History](assets/img/project1searchhistory.png)    
+
+## Contributors  
+
+Tim Mackie https://github.com/Timmackie
+
+Joey Flatley https://github.com/Jflatley487
+
+Lanre Abu https://github.com/lanreabu77
+
+Stephanie Jauch https://github.com/Jflatley487
