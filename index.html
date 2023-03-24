@@ -14,10 +14,12 @@
     /* Add margin to the body element */
     body {
       margin: 2rem;
+      background-color: #f2f6ff;
     }
 
-    /* Center-align h1 and h4 elements */
+    /* Center-align h1, h3, and h4 elements */
     h1,
+    h3,
     h4 {
       text-align: center;
     }
@@ -78,9 +80,25 @@
       text-align: center;
     }
 
-    /* Style for the body element */
-    body {
-      background-color: #f2f6ff;
+    /* Style for the history container */
+    #history-container {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+    }
+
+    /* Style for the history items */
+    .history-item {
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      color: #4a4a4a;
+      font-size: 1.1rem;
+    }
+
+    .history-item:hover {
+      color: #3273dc;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -116,9 +134,11 @@
   <div id="recipes"></div>
   <!-- Div for displaying history -->
   <div>
-    <h3>History</h3>
-    <p>Protein: <span id="protein"></span></p>
+    <h2>Last Searched</h2>
+    <p>Recipe: <span id="protein"></span></p>
   </div>
+  <div id="history-container"></div>
+
   <!-- JavaScript code for fetching and displaying the data -->
   <script src="./script.js"></script>
 </body>
