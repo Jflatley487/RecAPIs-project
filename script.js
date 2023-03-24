@@ -40,6 +40,7 @@ form.addEventListener("submit", function (event) {
 
             const instructionLinkElement = document.createElement("a");
             instructionLinkElement.href = recipeData.sourceUrl;
+            instructionLinkElement.setAttribute('target', '#');
             instructionLinkElement.textContent = "View Instructions";
             instructionLinkElement.addEventListener("click", (event) => {
               event.preventDefault();
@@ -87,26 +88,28 @@ form.addEventListener("submit", function (event) {
     // Render the updated history
     renderRecipeHistory();
   }
-
-  // Add a new function to render the history of clicked recipes
-  function renderRecipeHistory() {
-    const historyContainer = document.getElementById("history-container");
-    const clickedRecipes = JSON.parse(localStorage.getItem("clickedRecipes")) || [];
-
-    // Clear the history container
-    historyContainer.innerHTML = "";
-
-    // Create and append history elements
-    clickedRecipes.forEach((recipe) => {
-      const historyElement = document.createElement("a");
-      historyElement.href = recipe.url;
-      historyElement.textContent = recipe.title;
-      historyElement.classList.add("history-item");
-
-      historyContainer.appendChild(historyElement);
-    });
-  }
 });
+
+// Add a new function to render the history of clicked recipes
+function renderRecipeHistory() {
+  const historyContainer = document.getElementById("history-container");
+  const clickedRecipes = JSON.parse(localStorage.getItem("clickedRecipes")) || [];
+  console.log(clickedRecipes);
+  // Clear the history container
+  historyContainer.innerHTML = "";
+
+  // Create and append history elements
+  clickedRecipes.forEach((recipe) => {
+    console.log(recipe);
+    const historyElement = document.createElement("a");
+    historyElement.href = recipe.url;
+    historyElement.setAttribute('target', "#");
+    historyElement.textContent = recipe.title;
+    historyElement.classList.add("history-item");
+
+    historyContainer.append(historyElement);
+  });
+}
 
 
 // Fetch a dad joke and display it on the HTML page
@@ -121,3 +124,7 @@ fetch("https://icanhazdadjoke.com/", {
     const jokeContainer = document.getElementById("joke-container");
     jokeContainer.innerHTML = joke;
   });
+
+renderRecipeHistory();
+
+
