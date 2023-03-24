@@ -10,98 +10,146 @@ var protein = document.getElementById("protein");
 
 // Add an event listener to the form when it is submitted
 form.addEventListener("submit", function (event) {
-    event.preventDefault(); // prevent the default form submission
-    var food = foodDropdown.value;
-    recipesContainer.innerHTML = "";
+  event.preventDefault(); // prevent the default form submission
+  var food = foodDropdown.value;
+  recipesContainer.innerHTML = "";
 
-    // Fetch recipes based on the selected food ingredient
-    fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkeys}&includeIngredients=${food}&number=5`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            data.results.forEach((recipe) => {
-                // Fetch the information for each recipe
-                fetch(
-                    `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkeys}`
-                )
-                    .then((response) => response.json())
-                    .then((recipeData) => {
-                        // Create HTML elements for the recipe
-                        const recipeElement = document.createElement("div");
-                        recipeElement.classList.add("recipe");
+  // Fetch recipes based on the selected food ingredient
+  fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkeys}&includeIngredients=${food}&number=5`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      data.results.forEach((recipe) => {
+        // Fetch the information for each recipe
+        fetch(
+          `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkeys}`
+        )
+          .then((response) => response.json())
+          .then((recipeData) => {
+            // Create HTML elements for the recipe
+            const recipeElement = document.createElement("div");
+            recipeElement.classList.add("recipe");
 
-                        const imageElement = document.createElement("img");
-                        imageElement.src = recipe.image;
+            const imageElement = document.createElement("img");
+            imageElement.src = recipe.image;
 
-                        const titleElement = document.createElement("h2");
-                        titleElement.textContent = recipe.title;
+            const titleElement = document.createElement("h2");
+            titleElement.textContent = recipe.title;
 
-                        const instructionLinkElement = document.createElement("a");
-                        instructionLinkElement.href = recipeData.sourceUrl;
-                        instructionLinkElement.textContent = "View Instructions";
-
-                        // Add the elements to the HTML page
-                        recipeElement.appendChild(imageElement);
-                        recipeElement.appendChild(titleElement);
-                        recipeElement.appendChild(instructionLinkElement);
-                        recipesContainer.appendChild(recipeElement);
-                    })
-                    .catch((error) => {
-                        console.error(`Error fetching recipe with ID ${recipe.id}`, error);
-                    });
+            const instructionLinkElement = document.createElement("a");
+            instructionLinkElement.href = recipeData.sourceUrl;
+            instructionLinkElement.textContent = "View Instructions";
+            instructionLinkElement.addEventListener("click", (event) => {
+              event.preventDefault();
+              saveClickedRecipe(recipe.id, recipe.title, recipeData.sourceUrl);
+              window.open(recipeData.sourceUrl);
             });
-        })
-        .catch((error) => {
-            console.error("Error fetching data", error);
-        });
 
-    // Save and render the last searched protein ingredient
-    function saveLastProtein() {
-        var lastSearchedProtein = {
-            protein: foodDropdown.value,
-        };
-        localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
-    }
-
-    function renderLastProtein() {
-        var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
-        if (lastProtein !== null) {
-            document.getElementById("protein").innerHTML = lastProtein.protein;
-
-        } else {
-            return;
-        }
-    }
-
-    // Add an event listener to the submit button to save and render the last searched protein
-    submitButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        saveLastProtein();
-        renderLastProtein();
+            // Add the elements to the HTML page
+            recipeElement.appendChild(imageElement);
+            recipeElement.appendChild(titleElement);
+            recipeElement.appendChild(instructionLinkElement);
+            recipesContainer.appendChild(recipeElement);
+          })
+          .catch((error) => {
+            console.error(`Error fetching recipe with ID ${recipe.id}`, error);
+          });
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching data", error);
     });
 
-    // Render the last searched protein on page load
-    function init() {
-        renderLastProtein();
-    }
-    init();
+  // Save and render the last searched protein ingredient
+  function saveLastProtein() {
+    var lastSearchedProtein = {
+      protein: foodDropdown.value,
+    };
+    localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
+  }
 
-    console.log(renderLastProtein);
+  function renderLastProtein() {
+    var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
+    if (lastProtein !== null) {
+      document.getElementById("protein").innerHTML = lastProtein.protein;
+
+    } else {
+      return;
+    }
+  }
+
+  // Add an event listener to the submit button to save and render the last searched protein
+  submitButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    saveLastProtein();
+    renderLastProtein();
+  });
+
+  // Save clicked recipes
+  function saveClickedRecipe(recipeId, recipeTitle, recipeUrl) {
+    let clickedRecipes = JSON.parse(localStorage.getItem("clickedRecipes")) || [];
+
+    // Check if the clicked recipe is already in the history
+    const existingIndex = clickedRecipes.findIndex((recipe) => recipe.id === recipeId);
+
+    // If the recipe is in the history, remove it
+    if (existingIndex !== -1) {
+      clickedRecipes.splice(existingIndex, 1);
+    }
+
+    // Add the clicked recipe to the beginning of the array
+    clickedRecipes.unshift({ id: recipeId, title: recipeTitle, url: recipeUrl });
+
+    // Keep only the last 5 clicked recipes
+    clickedRecipes = clickedRecipes.slice(0, 5);
+
+    // Save the updated array to local storage
+    localStorage.setItem("clickedRecipes", JSON.stringify(clickedRecipes));
+
+    // Render the updated history
+    renderRecipeHistory();
+  }
+
+  // Add a new function to render the history of clicked recipes
+  function renderRecipeHistory() {
+    const historyContainer = document.getElementById("history-container");
+    const clickedRecipes = JSON.parse(localStorage.getItem("clickedRecipes")) || [];
+
+    // Clear the history container
+    historyContainer.innerHTML = "";
+
+    // Create and append history elements
+    clickedRecipes.forEach((recipe) => {
+      const historyElement = document.createElement("a");
+      historyElement.href = recipe.url;
+      historyElement.textContent = recipe.title;
+      historyElement.classList.add("history-item");
+
+      historyContainer.appendChild(historyElement);
+    });
+  }
+
+  // // Render the last searched protein on page load
+  // function init() {
+  //   renderLastProtein();
+  //   renderRecipeHistory();
+  // }
+  // init();
+  // console.log(renderLastProtein);
 });
+
 
 // Fetch a dad joke and display it on the HTML page
 fetch("https://icanhazdadjoke.com/", {
-    headers: {
-        Accept: "application/json",
-    },
+  headers: {
+    Accept: "application/json",
+  },
 })
-    .then((response) => response.json())
-    .then((data) => {
-        const joke = data.joke;
-        const jokeContainer = document.getElementById("joke-container");
-        jokeContainer.innerHTML = joke;
-    });
-
-
+  .then((response) => response.json())
+  .then((data) => {
+    const joke = data.joke;
+    const jokeContainer = document.getElementById("joke-container");
+    jokeContainer.innerHTML = joke;
+  });
