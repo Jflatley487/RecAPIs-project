@@ -62,30 +62,6 @@ form.addEventListener("submit", function (event) {
       console.error("Error fetching data", error);
     });
 
-  // Save and render the last searched protein ingredient
-  function saveLastProtein() {
-    var lastSearchedProtein = {
-      protein: foodDropdown.value,
-    };
-    localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
-  }
-
-  function renderLastProtein() {
-    var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
-    if (lastProtein !== null) {
-      document.getElementById("protein").innerHTML = lastProtein.protein;
-
-    } else {
-      return;
-    }
-  }
-
-  // Add an event listener to the submit button to save and render the last searched protein
-  submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    saveLastProtein();
-    renderLastProtein();
-  });
 
   // Save clicked recipes
   function saveClickedRecipe(recipeId, recipeTitle, recipeUrl) {
