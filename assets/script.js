@@ -1,6 +1,6 @@
-//var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
+var APIkey = `45136b7fa6f94dc5a402582407e6e6af`;
 // var APIkeyt = `04061e24c1ff4f54b3143f477378f3ee`;
-var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
+//var APIkeys = `41a4ce17c2b3480fb0a513f21a2e40b0`;
 // var APIkeyl = `c5e235f24ba7435fb0d3fac538602e34 `;
 var form = document.querySelector("form");
 var foodDropdown = document.getElementById("food");
@@ -18,14 +18,14 @@ form.addEventListener("submit", function (event) {
   recipesContainer.innerHTML = "";
 
   fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkeys}&includeIngredients=${food}&number=2`
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${APIkey}&includeIngredients=${food}&number=5`
   )
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
       data.results.forEach((recipe) => {
         fetch(
-          `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkeys}`
+          `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${APIkey}`
         )
           .then((response) => response.json())
           .then((recipeData) => {
@@ -46,6 +46,7 @@ form.addEventListener("submit", function (event) {
             recipeElement.appendChild(titleElement);
             recipeElement.appendChild(instructionLinkElement);
             recipesContainer.appendChild(recipeElement);
+            console.log(recipeData)
           })
           .catch((error) => {
             console.error(`Error fetching recipe with ID ${recipe.id}`, error);
@@ -57,35 +58,41 @@ form.addEventListener("submit", function (event) {
     });
 
     function saveLastProtein () {
-      var lastSearchedProtein = {
-        protein: foodDropdown.value,
+      var lastSearchedProteins = JSON.parse(localStorage.getItem("lastSearchedProteins")) || [];
+      var protein = foodDropdown.value;
+      // Only add the protein to the array if it hasn't been searched before
+      if (lastSearchedProteins.indexOf(protein) === -1) {
+        lastSearchedProteins.unshift(protein);
+        // Keep only the last 5 searched proteins
+        lastSearchedProteins = lastSearchedProteins.slice(0, 5);
+        localStorage.setItem("lastSearchedProteins", JSON.stringify(lastSearchedProteins));
       }
-      localStorage.setItem("lastSearchedProtein", JSON.stringify(lastSearchedProtein));
     }
     
-    function renderLastProtein () {
-      var lastProtein = JSON.parse(localStorage.getItem("lastSearchedProtein"));
-      if (lastProtein !== null) {
-        document.getElementById("protein").innerHTML = lastProtein.protein;
-        
-        } else {
-          return;
-        }
+    function renderLastProteins () {
+      var lastProteins = JSON.parse(localStorage.getItem("lastSearchedProteins"));
+      if (lastProteins !== null) {
+        var proteinList = lastProteins.map(function(protein) {
+          return "<li>" + protein + "</li>";
+        }).join("");
+        document.getElementById("protein").innerHTML = "<ul>" + proteinList + "</ul>";
+      } else {
+        return;
       }
+    }
     
-      submitButton.addEventListener("click", function(event) {
-        event.preventDefault();
-        saveLastProtein();
-        renderLastProtein();
-        });
-        
-         
-        function init() {
-          renderLastProtein();
-        }
-        init();
-        
-        console.log(renderLastProtein)
+    submitButton.addEventListener("click", function(event) {
+      event.preventDefault();
+      saveLastProtein();
+      renderLastProteins();
+    });
+    
+    function init() {
+      renderLastProteins();
+    }
+    
+    init();
+        console.log(renderLastProteins)
 });
 
 
