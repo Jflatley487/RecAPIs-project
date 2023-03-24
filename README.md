@@ -2,7 +2,7 @@
 
 ## Overview
 
-A web *application* https://jflatley487.github.io/group1-project  that allows a user to **search** for **recipes** that include certain proteins.  The user will select a protein from a drop-down box.  Upon clicking the ***submit*** button, the user will be presented with the top 5 **recipes ** from Spoonacular for the selected protein.  
+A web *application* ( https://jflatley487.github.io/group1-project ) that allows a user to **search** for **recipes** that include certain proteins.  The user will select a protein from a drop-down box.  Upon clicking the ***submit*** button, the user will be presented with the top 5 **recipes ** from Spoonacular for the selected protein.  
 
 When the user clicks on a **recipe** link, the **recipe** link will appear as a clickable link on the homepage.  The last 5 **recipes** visited
 
@@ -30,11 +30,11 @@ The user will be able to **search** via a drop-down box for:
 
 In order for the *application* to be used, the user can go to https://jflatley487.github.io/group1-project and begin utilizing the **search** function immediately.  The user will be presented with a **joke** immediately on page load and for a new **joke**, the user simply needs to refresh the page.  The user does not need any additional extensions, plugins or downloads for this *application*. 
 
-![Home Page](assets/img/project1homepage.png)   
+  ![Alt text](assets/images/project1homepage.png)  
 
-![Search Complete](assets/img/project1search.png)    
+  ![Alt text](assets/images/project1search.png)  
 
-![Recipe History](assets/img/project1searchhistory.png)    
+  ![Alt text](assets/images/project1searchhistory.png)
 
 ## Contributors  
 
