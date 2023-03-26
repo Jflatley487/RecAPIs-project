@@ -30,11 +30,11 @@ The user will be able to **search** via a drop-down box for:
 
 In order for the *application* to be used, the user can go to https://jflatley487.github.io/group1-project and begin utilizing the **search** function immediately.  The user will be presented with a **joke** immediately on page load and for a new **joke**, the user simply needs to refresh the page.  The user does not need any additional extensions, plugins or downloads for this *application*. 
 
-![Home Page](assets/img/project1homepage.png)   
+![Home Page](images\project1homepage.png)   
 
-![Search Complete](assets/img/project1search.png)    
+![Search Complete](images\project1search.png)    
 
-![Recipe History](assets/img/project1searchhistory.png)    
+![Recipe History](images\project1searchhistory.png)    
 
 ## Contributors  
 
