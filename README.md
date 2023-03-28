@@ -2,7 +2,7 @@
 
 ## Overview
 
-A web *application* https://jflatley487.github.io/group1-project  that allows a user to **search** for **recipes** that include certain proteins.  The user will select a protein from a drop-down box.  Upon clicking the ***submit*** button, the user will be presented with the top 5 **recipes ** from Spoonacular for the selected protein.  
+A web *application* https://jflatley487.github.io/RecAPIs-project/  that allows a user to **search** for **recipes** that include certain proteins.  The user will select a protein from a drop-down box.  Upon clicking the ***submit*** button, the user will be presented with the top 5 **recipes ** from Spoonacular for the selected protein.  
 
 When the user clicks on a **recipe** link, the **recipe** link will appear as a clickable link on the homepage.  The last 5 **recipes** visited
 
