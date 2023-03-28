@@ -20,7 +20,6 @@ form.addEventListener("submit", function (event) {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       data.results.forEach((recipe) => {
         // Fetch the information for each recipe
         fetch(
@@ -94,13 +93,12 @@ form.addEventListener("submit", function (event) {
 function renderRecipeHistory() {
   const historyContainer = document.getElementById("history-container");
   const clickedRecipes = JSON.parse(localStorage.getItem("clickedRecipes")) || [];
-  console.log(clickedRecipes);
+
   // Clear the history container
   historyContainer.innerHTML = "";
 
   // Create and append history elements
   clickedRecipes.forEach((recipe) => {
-    console.log(recipe);
     const historyElement = document.createElement("a");
     historyElement.href = recipe.url;
     historyElement.setAttribute('target', "#");
